@@ -5,9 +5,10 @@
 
 ***
 
-### Binary Trees Traversal
+### Dependence on external modification
 
-This file runs if Stack and Queue element type is changed to from "int" to "Btree".
+Example:
+[Binary_Tree_Traversal.c] file is compilable only if Stack and Queue element type is changed from "int" to "Btree".
 
 ### Different Implementations of Data Structures
 

@@ -7,7 +7,7 @@ stack statCreateStack()
 	return well;
 }
 
-int statPush(stack* wellRef, element data)
+int statPush(stack* wellRef, Stcase data)
 {
 	if (statisFullStack(*wellRef)) { return 0; }
 	wellRef->data[++wellRef->top] = data;
@@ -21,7 +21,7 @@ int statPop(stack* wellRef)
 	return 1;
 }
 
-int statTop(stack well, element* data) 
+int statTop(stack well, Stcase* data) 
 {
 	if (statisEmptyStack(well)) { return 0; }
 	*data = well.data[well.top];

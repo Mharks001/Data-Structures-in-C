@@ -18,7 +18,7 @@ int isFullQueue(queue q)
 	return q.front == q.rear;
 }
 
-int EnQueue(queue* q, element e)
+int EnQueue(queue* q, Qucase e)
 {
 	if (isFullQueue(*q))	return 0;
 	
@@ -39,7 +39,7 @@ int DeQueue(queue* q)
 	return 1;
 }
 
-int Front(queue q, element* e)
+int Front(queue q, Qucase* e)
 {
 	if (isEmptyQueue(q))	return 0;
 	*e = q.data[q.front];

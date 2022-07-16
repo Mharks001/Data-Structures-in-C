@@ -1,5 +1,4 @@
 #include "DataType headers/Stack_Type.h"
-
 #define STD_STACK_SIZE 50
 
 typedef struct stack {

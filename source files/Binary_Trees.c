@@ -1,4 +1,4 @@
-#include "../header files/Binary_Trees.h"
+#include "Binary_Trees.h"
 
 Btree Construct(Btcase data, Btree left, Btree right)
 {

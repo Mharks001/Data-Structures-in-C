@@ -19,4 +19,4 @@ This shows the status of all files in Repository(excluding informative content).
 [Max_Heap.c] is complete and compilable if excepting [Min_Heap.c].
 [Min_Heap.c] is complete and compilable if excepting [Max_Heap.c].
 ### Sorting
-[Sort.c] is incomplete, but compilable.
+[Sort.c] is complete and compilable.

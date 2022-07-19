@@ -1,4 +1,4 @@
-#include "../header files/StatStack.h"
+#include "StatStack.h"
 
 stack statCreateStack()
 {

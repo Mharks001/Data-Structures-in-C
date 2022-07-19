@@ -1,4 +1,4 @@
-#include "../header files/StatQueue.h"
+#include "StatQueue.h"
 
 queue CreateQueue(void)
 {

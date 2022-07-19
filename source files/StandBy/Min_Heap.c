@@ -1,29 +1,74 @@
-#include "../header files/Min_Heap.h"
+#include "Min_Heap.h"
 
 static void swap(int* A, int* B) { int tmp = *A; *A = *B; *B = tmp; }
+static void insert(heap H, int data)
+{
+    int count = H->count;
+    if (count == H->capacity) Resize_Heap(H);
 
-static void fill(heap H, int index, int data) { *(H->array + index) = data; Precolate_Down(H, index); Precolate_Up(H, index); }
-static void value(heap H, int index) { if (index > H->count) return;   return *(H->array + index); }
-static void insert(heap H, int data) { if (H->count == H->capacity) Resize_Heap(H);   fill(H, H->count++, data); }
+    *(H->array + count) = data, H->count++;
+    Percolate_Up(H, count);
+}
 
+static int isMinHeap_Helper(heap H, int index)
+{
+    int left = Left_Child(index);
+    int right = Right_Child(index);
 
-heap Build_Heap(int* array, int size)
+    if (left < H->count)
+    {
+        if (!isMinHeap_Helper(H, left))    return 0;
+        if(*(H->array + index) > *(H->array + left))    return 0;
+    }
+    else return 1;
+    if (right < H->count)
+    {
+        if (!isMinHeap_Helper(H, right))    return 0;
+        if (*(H->array + index) > *(H->array + right))  return 0;
+    }
+    return 1;
+}
+extern int isMinHeap(heap H)
+{
+    if (H == NULL || H->array == NULL || H->count == 0)    return 0;
+    return isMinHeap_Helper(H, 0);
+}
+
+void Build_Heap(heap H, int* array, int size)
 {
     if (array == NULL || size == 0)  return NULL;
-
-    heap H = (heap)malloc(sizeof(struct heap));
-    if (H == NULL)   return NULL;
-
-    H->capacity = DEFAULT_HEAP_CAPACITY;
+    
+    H->array = (int*)malloc(sizeof(int) * size);
+    if (H->array == NULL)   return;
+    
     H->count = 0;
-
-    H->array = (int*)malloc(sizeof(int) * DEFAULT_HEAP_CAPACITY);
-    if (H->array == NULL) { free(H); return NULL; }
+    H->capacity = size;
 
     for (int i = 0; i < size; i++) insert(H, *(array + i));
-
-    return H;
 }
+
+int GetMinimum_Heap(heap H, int* e)
+{
+    if (e == NULL || H == NULL || H->array == NULL || H->count == 0)    return 0;
+    *e = *(H->array);
+    return 1;
+}
+int DeleteMinimum_Heap(heap H)
+{
+    if (H == NULL)   return 0;
+
+    int* array = H->array;
+    if (array == NULL || H->count <= 0)  return 0;
+
+    H->count--;
+    if (H->count == 0)   return 1;
+
+    *(array) = *(array + H->count);
+
+    Percolate_Down(H, 0);
+    return 1;
+}
+
 
 void Percolate_Up(heap H, int index)
 {
@@ -31,12 +76,11 @@ void Percolate_Up(heap H, int index)
 
     int parent_index = Parent(index);
 
-    if (parent_index < 0 && *(H->array + index) >= *(H->array + parent_index))   return;
+    if (parent_index < 0 || *(H->array + index) >= *(H->array + parent_index))   return;
 
     swap(H->array + index, H->array + parent_index);
-    Precolate_Up(H, parent_index);
+    Percolate_Up(H, parent_index);
 }
-
 void Percolate_Down(heap H, int index)
 {
     if (index < 0 || index > H->count)   return;
@@ -50,7 +94,7 @@ void Percolate_Down(heap H, int index)
     if (min == index)   return;
 
     swap(H->array + index, H->array + min);
-    Precolate_Down(H, min);
+    Percolate_Down(H, min);
 }
 
 int Heapify(int* array, int size)
@@ -58,10 +102,17 @@ int Heapify(int* array, int size)
     if (array == NULL || size <= 1)  return 1;
     int index = Parent(size - 1);
 
-    heap H = Create_Heap(array, size);
+    heap H = Create_Heap();
     if (H == NULL)   return 0;
+
+    if (H->array)    free(H->array);
+
+    H->array = array;
+    H->count = H->capacity = size;
 
     while (index >= 0)   Percolate_Down(H, index), index--;
 
     free(H);
+
+    return 1;
 }

@@ -1,8 +1,8 @@
-#include "../header files/Heap.h"
+#include "Heap.h"
 
 int Parent(int child_index) { return (child_index - 1) / 2; }
-int Right_Child(int parent_index) { return 2 * parent_index + 1; }
 int Left_Child(int parent_index) { return 2 * parent_index + 1; }
+int Right_Child(int parent_index) { return 2 * parent_index + 2; }
 
 
 heap Create_Heap()
@@ -41,7 +41,7 @@ int Destroy_Heap(heap* H)
 
     if ((*H)->array != NULL)    free((*H)->array);
     
-    free(*H); 
+    
     *H = NULL;
     
     return 1;

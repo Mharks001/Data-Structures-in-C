@@ -12,4 +12,4 @@ Example:
 
 ### Different Implementations of Data Structures
 
-These files can be swapped with other implementation of the same Data Structure.
+These files can be swapped with other implementation of the same data structure.

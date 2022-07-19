@@ -1,4 +1,4 @@
-#include "../header files/Binary_Tree_Traversal.h"
+#include "Binary_Tree_Traversal.h"
 
 //	Level Order Iterative: Level by Level
 void LevelOrder(Btree B, void (*func)(Btree))

@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "DataType headers/Binary_Tree_Type.h"
+#include "Binary_Tree_Type.h"
 
 typedef struct BTnode {
 	Btcase data;

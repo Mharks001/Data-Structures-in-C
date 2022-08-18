@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "DataType headers/Stack_Type.h"
+#include "Stack_Type.h"
 
 
 typedef struct cell{

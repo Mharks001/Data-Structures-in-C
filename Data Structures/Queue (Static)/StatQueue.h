@@ -1,4 +1,4 @@
-#include "DataType headers/Queue_Type.h"
+#include "Queue_Type.h"
 #define STD_QUEUE_SIZE 50
 
 typedef struct queue {

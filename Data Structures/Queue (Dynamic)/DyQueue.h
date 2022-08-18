@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "DataType headers/Queue_Type.h"
+#include "Queue_Type.h"
 
 typedef struct node{
 	Qucase data;

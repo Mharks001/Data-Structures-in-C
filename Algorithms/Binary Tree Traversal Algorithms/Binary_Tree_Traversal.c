@@ -35,17 +35,24 @@ void inorder(Btree B, void (*func)(Btree))
 void inorder_Iter(Btree B, void (*func)(Btree))
 {
 	if (B == NULL)	return;
-	queue q = CreateQueue();
+	stack q = CreateStack();
 	
-	EnQueue(&q, B);
-	while (Front(q, &B))
+	Push(&q, B);
+	
+	while (Top(q, &B))
 	{
-		DeQueue(&q);
+		Pop(&q);
 		
+		while (B != NULL)
+		{
+			Push(&s, B);
+			B = B->left;
+		}
+
 		func(B);
 
-		if(B->left != NULL)		EnQueue(&q, B->left);
-		if(B->right != NULL)	EnQueue(&q, B->right);
+		Top(s, &B), Pop(&s);
+		if(B->right != NULL)	Push(&s, B->right);
 	}
 }
 

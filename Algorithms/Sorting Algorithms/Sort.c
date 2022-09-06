@@ -124,6 +124,32 @@ void BubbleSort(int* begin, int* end, int (*cmp)(int, int))
             if(!cmp(*(j-1), *j)) swap(j-1, j), flag = 1;
     }
 }
+void ShakerSort(int* begin, int* end, int (*cmp)(int, int))
+{
+    if (begin == NULL || end == NULL)    return;
+
+    int counter = 0;
+    char flag = 1;
+    while(begin < end && flag)
+    {
+        flag = 0;
+        
+        if (counter % 2)
+        {
+            for (int* j = end; j > begin; j--)
+                if (!cmp( *(j - 1), *j)) swap(j - 1, j), flag = 1;
+            
+            end--;
+        }
+        else
+        {
+            for (int* j = begin; j < end; j++)
+                if (!cmp(*j, *(j + 1))) swap(j, j + 1), flag = 1;
+            begin++;
+        }
+        counter++;
+    }
+}
 void InsertionSort(int* begin, int* end, int (*cmp)(int, int)) 
 {
     int* bound = begin + 1;

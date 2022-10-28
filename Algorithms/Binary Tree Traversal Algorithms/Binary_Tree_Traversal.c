@@ -35,24 +35,23 @@ void inorder(Btree B, void (*func)(Btree))
 void inorder_Iter(Btree B, void (*func)(Btree))
 {
 	if (B == NULL)	return;
-	stack q = CreateStack();
 	
+	int proceed = 1;
+	stack q = CreateStack();
 	Push(&q, B);
 	
-	while (Top(q, &B))
-	{
-		Pop(&q);
-		
-		while (B != NULL)
+	while (proceed)
+	{		
+		while (B != NULL)	Push(&s, B), B = B->left;
+
+		if(Top(s, &B))
 		{
-			Push(&s, B);
-			B = B->left;
+			Pop(&s);
+			func(B);
+
+			B = B->right;
 		}
-
-		func(B);
-
-		Top(s, &B), Pop(&s);
-		if(B->right != NULL)	Push(&s, B->right);
+		else proceed = 0;
 	}
 }
 
@@ -119,23 +118,13 @@ void postoder_Iter(Btree B, void (*func)(Btree))
 
 	while (proceed)
 	{
-		while (B != NULL)
-		{
-			Push(&s, B);
-			B = B->left;
-		}
-		do {
-			
-			if (!Top(s, &B))	return;
-			if (B->right == NULL || prev == B->right)
-			{
-				func(B);
-				Pop(&s);
-				prev = B;
-				B = NULL;
-			}
-			else B = B->right;
+		while(B != NULL)	Push(&s, B), B = B->left;
 
-		} while (B == NULL);
+		if(Top(s,&B))
+		{
+			if(B->right == NULL || B->right == prev)	func(B), Pop(&s), prev = B, B = NULL;
+			else B = B->right;
+		}
+		else proceed = 0;
 	}
 }
